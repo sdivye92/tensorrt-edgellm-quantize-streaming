@@ -127,6 +127,15 @@ that consumes them. Both replay paths — `layerwise_calibrate`'s
 queue *inside* the patched forward — funnel through that inner attribute,
 which is why hydration lives there rather than at the call sites.
 
+## Further reading
+
+[`docs/layerwise-calibration-notes.md`](docs/layerwise-calibration-notes.md) covers, in
+detail: the two environment fixes needed to get `--layerwise` running on a consumer GPU
+(CPython headers for Triton's JIT, and the `nvcc` toolchain ModelOpt's FP8 kernel needs —
+whose absence is a *warning*, not an error, and costs ~22x calibration speed); how to
+read the `skip / run / capture` calibration log; and the design, failure modes and
+measured results of `--offload_calib_activations`.
+
 ## Out of scope / known limitations
 
 - **Qwen3-Omni, Qwen3-Omni-Next, Qwen3-ASR, Phi-4MM, NemotronH*:** these use
